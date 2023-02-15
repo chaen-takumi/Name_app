@@ -3,11 +3,13 @@ package com.example.name_app
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 
-class MainActivity : AppCompatActivity() {
+class MainActivity() : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,14 +21,14 @@ class MainActivity : AppCompatActivity() {
         btnStart.setOnClickListener {
             if (et.text.toString() == ("")) {
                 Toast.makeText(this, "何か書いて", Toast.LENGTH_LONG).show()
+            } else {
+                val intent = Intent(this, SecondActivity::class.java)
+                //値の受け渡し
+                intent.putExtra("MY_NAME", et.text.toString())
+
+                startActivity(intent)
             }
 
-        } else {
-            val intent = Intent(this, SecondActivity::class.java)
-            //値の受け渡し
-            intent.putExtra("MY_NAME", et.text.toString())
-
-            startActivity(intent)
         }
     }
 }
